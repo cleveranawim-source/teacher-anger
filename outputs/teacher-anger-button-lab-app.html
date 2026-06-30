@@ -79,19 +79,28 @@
     }
 
     .brand-mark {
-      width: 52px;
-      height: 52px;
+      width: 118px;
+      height: 48px;
       border-radius: 8px;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,.72), transparent),
-        conic-gradient(from 210deg, var(--mint), var(--gold), var(--apricot), var(--blue), var(--mint));
-      border: 1px solid rgba(91, 70, 43, .13);
-      box-shadow: 0 10px 20px rgba(91, 70, 43, .09);
-      display: grid;
+      background: #2e704e;
+      border: 1px solid rgba(30, 86, 58, .22);
+      box-shadow: 0 10px 20px rgba(38, 96, 67, .14);
+      display: flex;
       place-items: center;
-      color: var(--navy);
+      align-items: center;
+      justify-content: center;
       font-weight: 900;
-      font-size: 24px;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .brand-mark .lev {
+      color: #fffefa;
+    }
+
+    .brand-mark .lab {
+      color: #8fd1b2;
     }
 
     h1,
@@ -917,15 +926,15 @@
       }
 
       .brand {
-        grid-template-columns: 42px 1fr;
+        grid-template-columns: 96px 1fr;
         align-items: center;
         margin-bottom: 12px;
       }
 
       .brand-mark {
-        width: 42px;
-        height: 42px;
-        font-size: 20px;
+        width: 96px;
+        height: 38px;
+        font-size: 17px;
       }
 
       h1 {
@@ -1095,7 +1104,7 @@
   <div class="app">
     <aside class="sidebar">
       <div class="brand">
-        <div class="brand-mark">心</div>
+        <div class="brand-mark" aria-label="LevLab 로고"><span class="lev">Lev</span><span class="lab">Lab</span></div>
         <div>
           <h1>선생님의 분노버튼 연구소</h1>
           <p class="lead">나를 지키는 교사 마음 설명서 만들기</p>
