@@ -38,6 +38,7 @@
       font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
       line-height: 1.55;
       letter-spacing: 0;
+      overflow-x: hidden;
     }
 
     button,
@@ -171,6 +172,7 @@
 
     .screen {
       display: none;
+      width: 100%;
       max-width: 1120px;
       margin: 0 auto;
     }
@@ -222,7 +224,9 @@
       width: min(100%, 330px);
       height: auto;
       border-radius: 8px;
+      max-height: 460px;
       object-fit: cover;
+      object-position: center;
       filter: drop-shadow(0 24px 24px rgba(91, 70, 43, .12));
       z-index: 1;
     }
@@ -324,6 +328,13 @@
 
     .question p {
       margin: 0;
+    }
+
+    .question-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding-top: 18px;
     }
 
     .scale {
@@ -850,7 +861,8 @@
       }
 
       .progress {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 6px;
       }
 
       .step-link {
@@ -863,7 +875,7 @@
       }
 
       main {
-        padding: 20px;
+        padding: 18px;
       }
 
       .hero,
@@ -878,11 +890,13 @@
       }
 
       .hero-visual {
-        min-height: 360px;
+        min-height: auto;
+        padding: 16px;
       }
 
       .hero-illustration {
-        max-width: 280px;
+        width: min(100%, 360px);
+        max-height: 380px;
       }
 
       .sticky-summary {
@@ -891,6 +905,57 @@
     }
 
     @media (max-width: 680px) {
+      .sidebar {
+        padding: 14px 12px;
+      }
+
+      .brand {
+        grid-template-columns: 42px 1fr;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+      }
+
+      h1 {
+        font-size: 19px;
+      }
+
+      .lead {
+        font-size: 13px;
+      }
+
+      .progress {
+        margin: 12px 0;
+      }
+
+      .step-link {
+        padding: 6px;
+      }
+
+      .step-link span:first-child {
+        width: 28px;
+        height: 28px;
+      }
+
+      .side-note {
+        margin-top: 12px;
+        padding: 11px;
+      }
+
+      main {
+        padding: 12px;
+      }
+
+      .panel,
+      .meter-panel {
+        padding: 14px;
+      }
+
       .progress,
       .form-grid,
       .strategy-grid,
@@ -917,6 +982,24 @@
 
       .question {
         grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 16px 0;
+      }
+
+      .scale {
+        gap: 5px;
+      }
+
+      .scale label {
+        min-height: 42px;
+      }
+
+      .question-actions {
+        justify-content: stretch;
+      }
+
+      .question-actions .btn {
+        width: 100%;
       }
 
       .screen-head {
@@ -924,7 +1007,26 @@
       }
 
       .hero-title {
-        font-size: 34px;
+        font-size: 31px;
+        line-height: 1.12;
+      }
+
+      .hero-copy {
+        font-size: 16px;
+      }
+
+      .hero {
+        min-height: auto;
+        gap: 16px;
+      }
+
+      .hero-visual {
+        padding: 10px;
+      }
+
+      .hero-illustration {
+        width: 100%;
+        max-height: 320px;
       }
 
       .card-visual {
@@ -1332,7 +1434,7 @@
 
     function renderQuestions() {
       let questionNumber = 0;
-      $("#questionList").innerHTML = types.map((type) => `
+      const questionMarkup = types.map((type) => `
         ${type.questions.map((question, index) => {
             questionNumber += 1;
             const key = `${type.id}-${index}`;
@@ -1353,6 +1455,12 @@
             `;
           }).join("")}
       `).join("");
+      $("#questionList").innerHTML = `
+        ${questionMarkup}
+        <div class="question-actions">
+          <button class="btn primary" type="button" data-go="result">결과 보기</button>
+        </div>
+      `;
 
       $$("#questionList input[type='radio']").forEach((input) => {
         input.addEventListener("change", (event) => {
