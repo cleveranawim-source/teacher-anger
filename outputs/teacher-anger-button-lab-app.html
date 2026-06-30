@@ -218,144 +218,11 @@
       padding: 28px;
     }
 
-    .hero-visual::before,
-    .hero-visual::after {
-      content: "";
-      position: absolute;
-      width: 138px;
-      height: 92px;
-      border-radius: 8px;
-      border: 1px solid rgba(91, 70, 43, .12);
-      background: rgba(255, 255, 255, .78);
-      box-shadow: 0 12px 24px rgba(91, 70, 43, .08);
-    }
-
-    .hero-visual::before {
-      left: 28px;
-      top: 34px;
-      transform: rotate(-5deg);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.28)),
-        var(--gold);
-    }
-
-    .hero-visual::after {
-      right: 30px;
-      top: 70px;
-      transform: rotate(4deg);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.25)),
-        var(--blue);
-    }
-
-    .character-preview {
-      width: 250px;
-      height: 320px;
-      position: relative;
-      filter: drop-shadow(0 18px 18px rgba(91, 70, 43, .13));
+    .hero-illustration {
+      width: min(100%, 330px);
+      height: auto;
+      filter: drop-shadow(0 24px 24px rgba(91, 70, 43, .12));
       z-index: 1;
-    }
-
-    .character-preview::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 74px;
-      width: 170px;
-      height: 170px;
-      transform: translateX(-50%);
-      border-radius: 46% 54% 50% 50%;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,.46), transparent 42%),
-        #f6c98f;
-      border: 4px solid rgba(91, 70, 43, .15);
-    }
-
-    .character-preview::after {
-      content: "";
-      position: absolute;
-      left: 44px;
-      top: 216px;
-      width: 162px;
-      height: 78px;
-      border-radius: 42px 42px 12px 12px;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,.35), transparent),
-        #79bea8;
-      border: 4px solid rgba(91, 70, 43, .15);
-    }
-
-    .face {
-      position: absolute;
-      left: 69px;
-      top: 124px;
-      width: 112px;
-      height: 64px;
-      z-index: 1;
-    }
-
-    .face i {
-      position: absolute;
-      top: 8px;
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      background: var(--ink);
-    }
-
-    .face i:first-child {
-      left: 22px;
-    }
-
-    .face i:nth-child(2) {
-      right: 22px;
-    }
-
-    .face b {
-      position: absolute;
-      left: 36px;
-      bottom: 8px;
-      width: 40px;
-      height: 18px;
-      border-bottom: 4px solid var(--ink);
-      border-radius: 0 0 40px 40px;
-    }
-
-    .sparkline {
-      position: absolute;
-      right: 22px;
-      bottom: 22px;
-      left: 22px;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-      align-items: end;
-    }
-
-    .sparkline span {
-      min-height: 38px;
-      border-radius: 8px 8px 3px 3px;
-      background: rgba(49, 85, 100, .78);
-    }
-
-    .sparkline span:nth-child(2) {
-      height: 86px;
-      background: #5aa897;
-    }
-
-    .sparkline span:nth-child(3) {
-      height: 55px;
-      background: #ffd56a;
-    }
-
-    .sparkline span:nth-child(4) {
-      height: 112px;
-      background: #e79b72;
-    }
-
-    .sparkline span:nth-child(5) {
-      height: 72px;
-      background: #89aad0;
     }
 
     .panel {
@@ -438,6 +305,10 @@
 
     .grid.two {
       grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+    }
+
+    .question-layout {
+      display: block;
     }
 
     .question-group {
@@ -549,23 +420,125 @@
 
     .result-hero {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
       gap: 16px;
+      align-items: start;
     }
 
     .type-card {
-      padding: 18px;
+      padding: 0;
       border-radius: var(--radius);
       border: 1px solid var(--line);
       background:
         linear-gradient(180deg, rgba(255,255,255,.9), rgba(255, 250, 242, .92)),
         #fffefa;
       box-shadow: 0 12px 24px rgba(91, 70, 43, .08);
+      overflow: hidden;
     }
 
     .type-card h3 {
       font-size: 26px;
       margin-bottom: 8px;
+    }
+
+    .result-summary {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+    }
+
+    .result-main {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 18px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--mint), #fff5d7);
+      border: 1px solid rgba(91, 70, 43, .12);
+    }
+
+    .result-emoji {
+      width: 72px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .72);
+      border: 1px solid rgba(91, 70, 43, .1);
+      font-size: 38px;
+    }
+
+    .result-main h3 {
+      font-size: 30px;
+      margin-bottom: 4px;
+    }
+
+    .result-score {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(49, 85, 100, .1);
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .insight-card {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffefa;
+    }
+
+    .insight-card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .insight-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--apricot), #fff6df);
+      font-size: 24px;
+    }
+
+    .insight-card h4 {
+      margin: 0 0 4px;
+      color: var(--navy);
+      font-size: 16px;
+    }
+
+    .insight-card p {
+      margin: 0;
+      color: #3e4b4d;
+    }
+
+    .meter-panel {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.9), rgba(255, 254, 250, .88)),
+        var(--panel);
+      border: 1px solid rgba(230, 221, 208, .92);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .meter-panel h3 {
+      margin-bottom: 6px;
     }
 
     .chip-list {
@@ -862,6 +835,10 @@
         min-height: 360px;
       }
 
+      .hero-illustration {
+        max-width: 280px;
+      }
+
       .sticky-summary {
         position: static;
       }
@@ -871,7 +848,13 @@
       .progress,
       .form-grid,
       .strategy-grid,
-      .quote-options {
+      .quote-options,
+      .insight-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .result-main,
+      .insight-card {
         grid-template-columns: 1fr;
       }
 
@@ -964,10 +947,37 @@
             </div>
           </div>
           <div class="hero-visual" aria-hidden="true">
-            <div class="character-preview">
-              <div class="face"><i></i><i></i><b></b></div>
-            </div>
-            <div class="sparkline"><span></span><span></span><span></span><span></span><span></span></div>
+            <svg class="hero-illustration" viewBox="0 0 360 470" role="img" aria-label="마음 안정 캐릭터 일러스트">
+              <defs>
+                <linearGradient id="paperGlow" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#ffffff"/>
+                  <stop offset="1" stop-color="#fff0d7"/>
+                </linearGradient>
+                <linearGradient id="bodyMint" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#9edccb"/>
+                  <stop offset="1" stop-color="#69ad9a"/>
+                </linearGradient>
+                <linearGradient id="warmFace" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#ffd89a"/>
+                  <stop offset="1" stop-color="#f3bd7e"/>
+                </linearGradient>
+              </defs>
+              <rect x="18" y="14" width="324" height="430" rx="22" fill="url(#paperGlow)" stroke="#eadcc9"/>
+              <path d="M67 61h108a12 12 0 0 1 12 12v75a12 12 0 0 1-12 12H67a12 12 0 0 1-12-12V73a12 12 0 0 1 12-12Z" fill="#fff0a8" stroke="#efd480" transform="rotate(-5 121 110)"/>
+              <path d="M215 88h105a12 12 0 0 1 12 12v72a12 12 0 0 1-12 12H215a12 12 0 0 1-12-12v-72a12 12 0 0 1 12-12Z" fill="#e9f4ff" stroke="#cbdced" transform="rotate(4 267 136)"/>
+              <path d="M84 396h45v34H84z" rx="7" fill="#6f8995"/>
+              <path d="M144 345h54v85h-54z" rx="9" fill="#69ad9a"/>
+              <path d="M215 376h54v54h-54z" rx="9" fill="#ffd76f"/>
+              <path d="M285 358h54v72h-54z" rx="9" fill="#86abd3"/>
+              <path d="M180 232c-56 0-102 46-102 102v47c0 13 11 24 24 24h156c13 0 24-11 24-24v-47c0-56-46-102-102-102Z" fill="url(#bodyMint)" stroke="#74b8a5" stroke-width="4"/>
+              <circle cx="180" cy="215" r="80" fill="url(#warmFace)" stroke="#e7b574" stroke-width="4"/>
+              <circle cx="151" cy="208" r="7" fill="#273437"/>
+              <circle cx="209" cy="208" r="7" fill="#273437"/>
+              <path d="M157 235c11 17 35 17 46 0" fill="none" stroke="#273437" stroke-width="4" stroke-linecap="round"/>
+              <path d="M127 178c19-25 55-34 85-23" fill="none" stroke="#ffe4b6" stroke-width="12" stroke-linecap="round" opacity=".62"/>
+              <path d="M105 294c-24-6-39-21-44-42" fill="none" stroke="#f0c98b" stroke-width="5" stroke-linecap="round"/>
+              <path d="M255 294c24-6 39-21 44-42" fill="none" stroke="#f0c98b" stroke-width="5" stroke-linecap="round"/>
+            </svg>
           </div>
         </div>
       </section>
@@ -984,21 +994,7 @@
           </div>
         </div>
 
-        <div class="grid two">
-          <div class="panel" id="questionList"></div>
-          <div class="panel sticky-summary">
-            <h3>응답 기준</h3>
-            <div class="scale-help" style="margin: 12px 0 18px;">
-              <span>0<br>거의 아님</span>
-              <span>1<br>조금</span>
-              <span>2<br>보통</span>
-              <span>3<br>꽤</span>
-              <span>4<br>매우</span>
-            </div>
-            <h3>현재 마음 게이지</h3>
-            <div class="bars" id="liveBars"></div>
-          </div>
-        </div>
+        <div class="panel question-layout" id="questionList"></div>
       </section>
 
       <section class="screen" id="resultScreen">
@@ -1015,8 +1011,9 @@
 
         <div class="result-hero">
           <div class="type-card" id="topTypeCard"></div>
-          <div class="panel">
+          <div class="meter-panel">
             <h3>전체 마음 게이지</h3>
+            <p class="lead" style="margin-bottom: 14px;">각 버튼의 상대적인 신호 크기를 확인해 보세요.</p>
             <div class="bars" id="resultBars"></div>
           </div>
         </div>
@@ -1144,6 +1141,7 @@
       {
         id: "ignored",
         name: "무시 버튼",
+        emoji: "🫥",
         color: "#5aa897",
         meaning: "내 말, 전문성, 수업 준비, 생활지도 노력이 가볍게 여겨진다고 느낄 때 눌리는 버튼입니다.",
         need: "존중, 인정, 경청, 전문성 존중",
@@ -1159,6 +1157,7 @@
       {
         id: "unfair",
         name: "억울함 버튼",
+        emoji: "⚖️",
         color: "#e79b72",
         meaning: "책임은 커지는데 상황과 맥락이 공정하게 보이지 않을 때 눌리는 버튼입니다.",
         need: "공정함, 맥락 이해, 책임의 균형",
@@ -1174,6 +1173,7 @@
       {
         id: "compare",
         name: "비교 버튼",
+        emoji: "📊",
         color: "#ffd56a",
         meaning: "다른 교사, 다른 학급, 성과, 민원 대응 방식과 비교될 때 눌리는 버튼입니다.",
         need: "고유성 인정, 과정 인정, 충분한 시간",
@@ -1189,6 +1189,7 @@
       {
         id: "boundary",
         name: "경계침범 버튼",
+        emoji: "🛡️",
         color: "#89aad0",
         meaning: "쉬는 시간, 사생활, 감정 노동, 업무 범위의 경계가 침범된다고 느낄 때 눌리는 버튼입니다.",
         need: "휴식, 안전한 거리, 업무 경계, 사생활",
@@ -1204,6 +1205,7 @@
       {
         id: "control",
         name: "통제 버튼",
+        emoji: "🧭",
         color: "#7d8d72",
         meaning: "교육적 판단이나 자율성이 제한되고 지시만 늘어난다고 느낄 때 눌리는 버튼입니다.",
         need: "자율성, 신뢰, 선택권, 교육적 판단권",
@@ -1220,8 +1222,8 @@
 
     const strategies = [
       { icon: "⏸️", title: "90초 멈춤", desc: "바로 반응하지 않고 몸의 긴장부터 낮추기" },
-      { icon: "💬", title: "문장 바꾸기", desc: "왜 또 이래? 대신 지금 내가 지키고 싶은 것은? 묻기" },
-      { icon: "🛟", title: "경계 문장 준비", desc: "지금 바로 답하기 어렵습니다. 확인 후 다시 말씀드리겠습니다." },
+      { icon: "💬", title: "문장 바꾸기", desc: "상대를 탓하는 말보다 내 필요를 확인하는 말로 바꾸기" },
+      { icon: "🛟", title: "경계 문장 준비", desc: "바로 답하기 어려울 때 쓸 차분한 보류·확인 문장을 미리 정하기" },
       { icon: "🌿", title: "짧은 회복 루틴", desc: "물 마시기, 창밖 보기, 복도 걷기, 호흡 세 번" },
       { icon: "🤝", title: "동료 연결", desc: "안전한 동료에게 사실과 감정을 분리해 말하기" },
       { icon: "📝", title: "기록 후 거리두기", desc: "바로 보내지 않고 메모장에 먼저 쓰기" },
@@ -1259,7 +1261,6 @@
     function init() {
       renderProgress();
       renderQuestions();
-      renderBars("#liveBars");
       renderStrategies();
       renderQuotes();
       bindEvents();
@@ -1350,8 +1351,8 @@
 
     function updateBars() {
       const scores = getScores();
-      ["#liveBars", "#resultBars"].forEach((target) => {
-        if (!$(target).children.length) renderBars(target);
+      ["#resultBars"].forEach((target) => {
+        if ($(target) && !$(target).children.length) renderBars(target);
       });
       types.forEach((type) => {
         const score = scores[type.id] || 0;
@@ -1455,21 +1456,43 @@
       const scores = getScores();
       const top = getTopType();
       $("#topTypeCard").innerHTML = `
-        <p class="chip">대표 신호</p>
-        <h3>${top.name}</h3>
-        <p>${top.meaning}</p>
-        <div class="card-section">
-          <h3>버튼 뒤 욕구</h3>
-          <p>${top.need}</p>
-        </div>
-        <div class="card-section">
-          <h3>해석</h3>
-          <p>${top.guide}</p>
-        </div>
-        <div class="chip-list">
-          <span class="chip">현재 점수 ${scores[top.id]}/20</span>
-          <span class="chip">비교하지 않기</span>
-          <span class="chip">신호로 보기</span>
+        <div class="result-summary">
+          <div class="result-main">
+            <div class="result-emoji">${top.emoji}</div>
+            <div>
+              <p class="chip">대표 마음 신호</p>
+              <h3>${top.name}</h3>
+              <span class="result-score">현재 점수 ${scores[top.id]}/20</span>
+            </div>
+          </div>
+          <div class="insight-grid">
+            <div class="insight-card">
+              <div class="insight-icon">🔔</div>
+              <div>
+                <h4>이 버튼의 의미</h4>
+                <p>${top.meaning}</p>
+              </div>
+            </div>
+            <div class="insight-card">
+              <div class="insight-icon">💛</div>
+              <div>
+                <h4>버튼 뒤 욕구</h4>
+                <p><strong>${top.need}</strong></p>
+              </div>
+            </div>
+            <div class="insight-card wide">
+              <div class="insight-icon">🧩</div>
+              <div>
+                <h4>해석</h4>
+                <p>${top.guide}</p>
+              </div>
+            </div>
+          </div>
+          <div class="chip-list">
+            <span class="chip">비교하지 않기</span>
+            <span class="chip">신호로 보기</span>
+            <span class="chip">필요 찾기</span>
+          </div>
         </div>
       `;
     }
