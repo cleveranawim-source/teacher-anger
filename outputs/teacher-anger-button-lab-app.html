@@ -961,7 +961,6 @@
             </p>
             <div class="actions">
               <button class="btn primary" type="button" data-go="questions">시작하기</button>
-              <button class="btn soft" type="button" id="quickFillBtn">연습용 예시 입력</button>
             </div>
           </div>
           <div class="hero-visual" aria-hidden="true">
@@ -1279,22 +1278,6 @@
         state.answers = {};
         $$("input[type='radio']").forEach((input) => input.checked = false);
         updateBars();
-      });
-
-      $("#quickFillBtn").addEventListener("click", () => {
-        types.forEach((type, typeIndex) => {
-          type.questions.forEach((_, questionIndex) => {
-            state.answers[`${type.id}-${questionIndex}`] = (typeIndex + questionIndex) % 5;
-          });
-        });
-        state.answers["boundary-0"] = 4;
-        state.answers["boundary-1"] = 4;
-        state.answers["boundary-2"] = 3;
-        state.answers["control-1"] = 4;
-        state.answers["control-2"] = 3;
-        syncInputs();
-        updateBars();
-        navigate("questions");
       });
 
       $("#copyPromptBtn").addEventListener("click", () => copyText(makeKoreanPrompt()));
