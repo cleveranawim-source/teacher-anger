@@ -931,10 +931,14 @@
 
       .progress {
         margin: 12px 0;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 6px;
       }
 
       .step-link {
         padding: 6px;
+        min-height: 36px;
+        background: rgba(255, 255, 255, .36);
       }
 
       .step-link span:first-child {
@@ -956,7 +960,6 @@
         padding: 14px;
       }
 
-      .progress,
       .form-grid,
       .strategy-grid,
       .quote-options,
