@@ -267,6 +267,11 @@
       align-items: center;
     }
 
+    .hero .actions {
+      justify-content: center;
+      max-width: 680px;
+    }
+
     .btn {
       min-height: 44px;
       border: 1px solid rgba(91, 70, 43, .15);
@@ -861,17 +866,19 @@
       }
 
       .progress {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
+        display: flex;
         gap: 6px;
+        overflow-x: auto;
+        padding-bottom: 4px;
       }
 
       .step-link {
-        grid-template-columns: 30px;
-        justify-items: center;
-      }
-
-      .step-link strong {
-        display: none;
+        width: auto;
+        min-width: 104px;
+        flex: 0 0 auto;
+        grid-template-columns: 30px auto;
+        justify-items: start;
+        white-space: nowrap;
       }
 
       main {
@@ -931,19 +938,24 @@
 
       .progress {
         margin: 12px 0;
-        grid-template-columns: repeat(6, minmax(0, 1fr));
+        display: flex;
         gap: 6px;
       }
 
       .step-link {
         padding: 6px;
         min-height: 36px;
+        min-width: 88px;
         background: rgba(255, 255, 255, .36);
       }
 
       .step-link span:first-child {
         width: 28px;
         height: 28px;
+      }
+
+      .step-link strong {
+        font-size: 12px;
       }
 
       .side-note {
