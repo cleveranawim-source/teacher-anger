@@ -311,25 +311,6 @@
       display: block;
     }
 
-    .question-group {
-      margin-bottom: 18px;
-    }
-
-    .group-title {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: baseline;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--line);
-      margin-bottom: 8px;
-    }
-
-    .group-title h3 {
-      margin-bottom: 0;
-      font-size: 20px;
-    }
-
     .question {
       display: grid;
       grid-template-columns: 1fr minmax(210px, 280px);
@@ -1304,17 +1285,14 @@
     }
 
     function renderQuestions() {
+      let questionNumber = 0;
       $("#questionList").innerHTML = types.map((type) => `
-        <div class="question-group">
-          <div class="group-title">
-            <h3>${type.name}</h3>
-            <span class="lead">${type.need}</span>
-          </div>
-          ${type.questions.map((question, index) => {
+        ${type.questions.map((question, index) => {
+            questionNumber += 1;
             const key = `${type.id}-${index}`;
             return `
               <div class="question">
-                <p>${index + 1}. ${question}</p>
+                <p>${questionNumber}. ${question}</p>
                 <div>
                   <div class="scale" role="radiogroup" aria-label="${question}">
                     ${[0, 1, 2, 3, 4].map((value) => `
@@ -1328,7 +1306,6 @@
               </div>
             `;
           }).join("")}
-        </div>
       `).join("");
 
       $$("#questionList input[type='radio']").forEach((input) => {
