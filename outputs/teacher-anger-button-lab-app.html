@@ -221,6 +221,8 @@
     .hero-illustration {
       width: min(100%, 330px);
       height: auto;
+      border-radius: 8px;
+      object-fit: cover;
       filter: drop-shadow(0 24px 24px rgba(91, 70, 43, .12));
       z-index: 1;
     }
@@ -542,10 +544,11 @@
       border-radius: var(--radius);
       min-height: 76px;
       display: grid;
-      grid-template-columns: 18px 42px 1fr;
+      grid-template-columns: 18px 42px 1fr auto;
       align-items: center;
       gap: 10px;
       text-align: left;
+      position: relative;
     }
 
     .choice input {
@@ -582,6 +585,19 @@
       font-size: 13px;
       font-weight: 600;
       line-height: 1.35;
+    }
+
+    .recommend-badge {
+      justify-self: end;
+      align-self: start;
+      border-radius: 999px;
+      padding: 4px 8px;
+      background: linear-gradient(135deg, var(--gold), #fff5d7);
+      border: 1px solid rgba(91, 70, 43, .12);
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
     }
 
     .strategy-grid {
@@ -661,7 +677,8 @@
       border: 1px solid #e6ddd0;
       border-radius: 8px;
       box-shadow: var(--shadow);
-      padding: 24px;
+      padding: 0;
+      overflow: hidden;
     }
 
     .result-card h2 {
@@ -669,8 +686,14 @@
       margin-bottom: 6px;
     }
 
+    .final-card-head {
+      padding: 22px;
+      background: linear-gradient(135deg, var(--mint), #fff3d1);
+      border-bottom: 1px solid rgba(91, 70, 43, .12);
+    }
+
     .card-visual {
-      height: 170px;
+      min-height: 170px;
       border-radius: 8px;
       background:
         linear-gradient(90deg, rgba(255,255,255,.28) 1px, transparent 1px),
@@ -685,6 +708,48 @@
       padding: 16px;
       margin: 16px 0;
       overflow: hidden;
+    }
+
+    .final-highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .final-highlight {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffefa;
+    }
+
+    .final-highlight.wide {
+      grid-column: 1 / -1;
+    }
+
+    .final-highlight-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--apricot), #fff6df);
+      font-size: 23px;
+    }
+
+    .final-highlight h3 {
+      margin: 0 0 4px;
+      color: var(--navy);
+      font-size: 15px;
+    }
+
+    .final-highlight p {
+      margin: 0;
     }
 
     .mini-character {
@@ -729,7 +794,7 @@
     }
 
     .card-section {
-      padding: 12px 0;
+      padding: 14px 18px;
       border-top: 1px solid #f0e7dc;
     }
 
@@ -830,13 +895,24 @@
       .form-grid,
       .strategy-grid,
       .quote-options,
-      .insight-grid {
+      .insight-grid,
+      .final-highlight-grid {
         grid-template-columns: 1fr;
       }
 
       .result-main,
-      .insight-card {
+      .insight-card,
+      .final-highlight {
         grid-template-columns: 1fr;
+      }
+
+      .choice {
+        grid-template-columns: 18px 42px 1fr;
+      }
+
+      .recommend-badge {
+        grid-column: 2 / -1;
+        justify-self: start;
       }
 
       .question {
@@ -928,37 +1004,7 @@
             </div>
           </div>
           <div class="hero-visual" aria-hidden="true">
-            <svg class="hero-illustration" viewBox="0 0 360 470" role="img" aria-label="마음 안정 캐릭터 일러스트">
-              <defs>
-                <linearGradient id="paperGlow" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#ffffff"/>
-                  <stop offset="1" stop-color="#fff0d7"/>
-                </linearGradient>
-                <linearGradient id="bodyMint" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#9edccb"/>
-                  <stop offset="1" stop-color="#69ad9a"/>
-                </linearGradient>
-                <linearGradient id="warmFace" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#ffd89a"/>
-                  <stop offset="1" stop-color="#f3bd7e"/>
-                </linearGradient>
-              </defs>
-              <rect x="18" y="14" width="324" height="430" rx="22" fill="url(#paperGlow)" stroke="#eadcc9"/>
-              <path d="M67 61h108a12 12 0 0 1 12 12v75a12 12 0 0 1-12 12H67a12 12 0 0 1-12-12V73a12 12 0 0 1 12-12Z" fill="#fff0a8" stroke="#efd480" transform="rotate(-5 121 110)"/>
-              <path d="M215 88h105a12 12 0 0 1 12 12v72a12 12 0 0 1-12 12H215a12 12 0 0 1-12-12v-72a12 12 0 0 1 12-12Z" fill="#e9f4ff" stroke="#cbdced" transform="rotate(4 267 136)"/>
-              <path d="M84 396h45v34H84z" rx="7" fill="#6f8995"/>
-              <path d="M144 345h54v85h-54z" rx="9" fill="#69ad9a"/>
-              <path d="M215 376h54v54h-54z" rx="9" fill="#ffd76f"/>
-              <path d="M285 358h54v72h-54z" rx="9" fill="#86abd3"/>
-              <path d="M180 232c-56 0-102 46-102 102v47c0 13 11 24 24 24h156c13 0 24-11 24-24v-47c0-56-46-102-102-102Z" fill="url(#bodyMint)" stroke="#74b8a5" stroke-width="4"/>
-              <circle cx="180" cy="215" r="80" fill="url(#warmFace)" stroke="#e7b574" stroke-width="4"/>
-              <circle cx="151" cy="208" r="7" fill="#273437"/>
-              <circle cx="209" cy="208" r="7" fill="#273437"/>
-              <path d="M157 235c11 17 35 17 46 0" fill="none" stroke="#273437" stroke-width="4" stroke-linecap="round"/>
-              <path d="M127 178c19-25 55-34 85-23" fill="none" stroke="#ffe4b6" stroke-width="12" stroke-linecap="round" opacity=".62"/>
-              <path d="M105 294c-24-6-39-21-44-42" fill="none" stroke="#f0c98b" stroke-width="5" stroke-linecap="round"/>
-              <path d="M255 294c24-6 39-21 44-42" fill="none" stroke="#f0c98b" stroke-width="5" stroke-linecap="round"/>
-            </svg>
+            <img class="hero-illustration" src="assets/teacher-mind-character.png" alt="">
           </div>
         </div>
       </section>
@@ -1202,14 +1248,14 @@
     ];
 
     const strategies = [
-      { icon: "⏸️", title: "90초 멈춤", desc: "바로 반응하지 않고 몸의 긴장부터 낮추기" },
-      { icon: "💬", title: "문장 바꾸기", desc: "상대를 탓하는 말보다 내 필요를 확인하는 말로 바꾸기" },
-      { icon: "🛟", title: "경계 문장 준비", desc: "바로 답하기 어려울 때 쓸 차분한 보류·확인 문장을 미리 정하기" },
-      { icon: "🌿", title: "짧은 회복 루틴", desc: "물 마시기, 창밖 보기, 복도 걷기, 호흡 세 번" },
-      { icon: "🤝", title: "동료 연결", desc: "안전한 동료에게 사실과 감정을 분리해 말하기" },
-      { icon: "📝", title: "기록 후 거리두기", desc: "바로 보내지 않고 메모장에 먼저 쓰기" },
-      { icon: "☕", title: "감각 안정", desc: "음악, 따뜻한 차, 손 마사지, 자연 이미지 보기" },
-      { icon: "🕰️", title: "업무 경계 세우기", desc: "답변 가능 시간, 상담 가능 범위, 기록 원칙 정하기" }
+      { icon: "⏸️", title: "90초 멈춤", desc: "바로 반응하지 않고 몸의 긴장부터 낮추기", recommendedFor: ["unfair", "control"] },
+      { icon: "💬", title: "문장 바꾸기", desc: "상대를 탓하는 말보다 내 필요를 확인하는 말로 바꾸기", recommendedFor: ["ignored", "compare", "unfair"] },
+      { icon: "🛟", title: "경계 문장 준비", desc: "바로 답하기 어려울 때 쓸 차분한 보류·확인 문장을 미리 정하기", recommendedFor: ["boundary", "control"] },
+      { icon: "🌿", title: "짧은 회복 루틴", desc: "물 마시기, 창밖 보기, 복도 걷기, 호흡 세 번", recommendedFor: ["boundary", "unfair"] },
+      { icon: "🤝", title: "동료 연결", desc: "안전한 동료에게 사실과 감정을 분리해 말하기", recommendedFor: ["ignored", "unfair", "compare"] },
+      { icon: "📝", title: "기록 후 거리두기", desc: "바로 보내지 않고 메모장에 먼저 쓰기", recommendedFor: ["control", "unfair"] },
+      { icon: "☕", title: "감각 안정", desc: "음악, 따뜻한 차, 손 마사지, 자연 이미지 보기", recommendedFor: ["boundary", "compare"] },
+      { icon: "🕰️", title: "업무 경계 세우기", desc: "답변 가능 시간, 상담 가능 범위, 기록 원칙 정하기", recommendedFor: ["boundary", "control"] }
     ];
 
     const quotes = [
@@ -1339,6 +1385,7 @@
     }
 
     function renderStrategies() {
+      const top = getTopType();
       $("#strategyList").innerHTML = strategies.map((strategy, index) => `
         <label class="choice">
           <input type="checkbox" value="${index}">
@@ -1347,6 +1394,7 @@
             <span class="choice-title">${strategy.title}</span>
             <span class="choice-desc">${strategy.desc}</span>
           </span>
+          ${strategy.recommendedFor.includes(top.id) ? '<span class="recommend-badge">추천</span>' : ""}
         </label>
       `).join("");
 
@@ -1389,6 +1437,7 @@
         id = "questions";
       }
       if (id === "result") renderResult();
+      if (id === "strategies") renderStrategies();
       if (id === "final") renderFinal();
       state.current = id;
       $$(".screen").forEach((screen) => screen.classList.remove("is-active"));
@@ -1465,11 +1514,6 @@
               </div>
             </div>
           </div>
-          <div class="chip-list">
-            <span class="chip">비교하지 않기</span>
-            <span class="chip">신호로 보기</span>
-            <span class="chip">필요 찾기</span>
-          </div>
         </div>
       `;
     }
@@ -1488,23 +1532,33 @@
         : "아직 선택하지 않았습니다.";
 
       $("#resultCard").innerHTML = `
-        <p class="chip">나를 지키는 교사 마음 설명서</p>
-        <h2>${safeCharName}와 함께 보는 마음 신호</h2>
-        <p class="lead">교직 생활 속 감정 반응을 탓하기보다, 내가 지키고 싶었던 필요를 살펴봅니다.</p>
+        <div class="final-card-head">
+          <p class="chip">나를 지키는 교사 마음 설명서</p>
+          <h2>${safeCharName}와 함께 보는 마음 신호</h2>
+          <p class="lead">교직 생활 속 감정 반응을 탓하기보다, 내가 지키고 싶었던 필요를 살펴봅니다.</p>
+        </div>
         <div class="card-visual">
-          <div class="mini-character"><span class="mini-mouth"></span></div>
+          <div class="result-emoji">${top.emoji}</div>
           <div>
-            <h3>${safeCharName}</h3>
+            <h3>${safeCharName}의 한마디</h3>
             <p>${safeCoachLine}</p>
           </div>
         </div>
-        <div class="card-section">
-          <h3>대표 분노버튼</h3>
-          <p><strong>${top.name}</strong> - ${top.meaning}</p>
-        </div>
-        <div class="card-section">
-          <h3>버튼 뒤의 핵심 욕구</h3>
-          <p>${top.need}</p>
+        <div class="final-highlight-grid">
+          <div class="final-highlight">
+            <div class="final-highlight-icon">🔔</div>
+            <div>
+              <h3>대표 분노버튼</h3>
+              <p><strong>${top.name}</strong><br>${top.meaning}</p>
+            </div>
+          </div>
+          <div class="final-highlight">
+            <div class="final-highlight-icon">💛</div>
+            <div>
+              <h3>버튼 뒤 욕구</h3>
+              <p><strong>${top.need}</strong></p>
+            </div>
+          </div>
         </div>
         <div class="card-section">
           <h3>나의 마음 안정 버튼</h3>
