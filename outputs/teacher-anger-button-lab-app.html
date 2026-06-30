@@ -656,6 +656,18 @@
       font-weight: 900;
     }
 
+    .field-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .field.is-hidden {
+      display: none;
+    }
+
     input[type="text"],
     textarea,
     select {
@@ -1231,7 +1243,12 @@
                   <option>깊은 남색과 크림색</option>
                   <option>연한 하늘색과 민트색</option>
                   <option>따뜻한 베이지와 잎사귀 초록</option>
+                  <option value="custom">직접 입력</option>
                 </select>
+              </div>
+              <div class="field is-hidden" id="charColorCustomField">
+                <label for="charColorCustom">직접 쓰는 색감</label>
+                <input id="charColorCustom" type="text" placeholder="예: 해질녘 살구빛과 짙은 초록">
               </div>
               <div class="field">
                 <label for="charMood">성격</label>
@@ -1245,7 +1262,8 @@
               </div>
               <div class="field full">
                 <label for="coachLine">캐릭터가 나에게 해주는 한마디</label>
-                <textarea id="coachLine">잠깐 멈춘다고 책임을 피하는 것은 아니야.</textarea>
+                <textarea id="coachLine" placeholder="내가 듣고 싶은 말을 직접 써 주세요.">잠깐 멈춘다고 책임을 피하는 것은 아니야.</textarea>
+                <p class="field-note">아래 예시를 눌러 넣어도 되고, 내 상황에 맞게 직접 고쳐 써도 됩니다.</p>
               </div>
               <div class="field full">
                 <label for="nextAction">다음 주에 해볼 작은 회복 행동</label>
@@ -1446,10 +1464,12 @@
       $("#printBtn").addEventListener("click", () => window.print());
       $("#restartBtn").addEventListener("click", () => navigate("start"));
 
-      ["charName", "charType", "charColor", "charMood", "coachLine", "nextAction"].forEach((id) => {
+      ["charName", "charType", "charColor", "charColorCustom", "charMood", "coachLine", "nextAction"].forEach((id) => {
         $(`#${id}`).addEventListener("input", renderFinal);
         $(`#${id}`).addEventListener("change", renderFinal);
       });
+      $("#charColor").addEventListener("change", updateColorCustomField);
+      updateColorCustomField();
     }
 
     function renderProgress() {
@@ -1459,6 +1479,11 @@
           <strong>${label}</strong>
         </button>
       `).join("");
+    }
+
+    function updateColorCustomField() {
+      const isCustom = getValue("charColor") === "custom";
+      $("#charColorCustomField").classList.toggle("is-hidden", !isCustom);
     }
 
     function renderQuestions() {
@@ -1713,7 +1738,7 @@
     function makeKoreanPrompt() {
       const charName = getValue("charName") || "마음 안정 캐릭터";
       const type = getValue("charType");
-      const color = getValue("charColor");
+      const color = getCharacterColor();
       const mood = getValue("charMood");
       const line = getValue("coachLine");
       return `차분하고 단단한 분위기의 마음 안정 캐릭터를 그려주세요. 캐릭터 이름은 "${charName}"입니다. 캐릭터는 ${mood} 느낌이며, 형태는 ${type}이고, 색감은 ${color}입니다. 교직 생활에서 지친 사람에게 "${line}"라는 말을 조용히 건네는 듯한 표정과 자세를 가지고 있습니다. 말풍선, 글자, 로고, 학교명, 실제 이름은 이미지 안에 넣지 마세요.`;
@@ -1721,10 +1746,15 @@
 
     function makeEnglishPrompt() {
       const type = getValue("charType");
-      const color = getValue("charColor");
+      const color = getCharacterColor();
       const mood = getValue("charMood");
       const line = getValue("coachLine");
       return `Create a calm and grounded emotional support character for a teacher. The character should feel ${mood}, with a ${color} color palette, and should be a ${type}. It should look as if it is quietly saying this coaching line: "${line}". Express care through facial expression, posture, and mood, not through written text. Do not include speech bubbles, text, letters, logos, school names, or real names.`;
+    }
+
+    function getCharacterColor() {
+      if (getValue("charColor") !== "custom") return getValue("charColor");
+      return getValue("charColorCustom") || "내가 직접 정한 색감";
     }
 
     function makeSummaryText() {
