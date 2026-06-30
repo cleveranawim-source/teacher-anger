@@ -753,6 +753,17 @@
       overflow: hidden;
     }
 
+    .card-visual > div:last-child {
+      justify-self: center;
+      text-align: center;
+    }
+
+    .card-visual h3,
+    .card-visual p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     .final-highlight-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1046,6 +1057,23 @@
 
       .screen-head {
         display: grid;
+      }
+
+      #finalScreen .screen-head h2 {
+        font-size: clamp(16px, 4.3vw, 28px);
+        white-space: nowrap;
+      }
+
+      #finalScreen .screen-head .toolbar {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      #finalScreen .screen-head .btn {
+        flex: 0 0 auto;
+        white-space: nowrap;
       }
 
       .hero-title {
@@ -1694,11 +1722,6 @@
         : "아직 선택하지 않았습니다.";
 
       $("#resultCard").innerHTML = `
-        <div class="final-card-head">
-          <p class="chip">나를 지키는 교사 마음 설명서</p>
-          <h2>${safeCharName}와 함께 보는 마음 신호</h2>
-          <p class="lead">교직 생활 속 감정 반응을 탓하기보다, 내가 지키고 싶었던 필요를 살펴봅니다.</p>
-        </div>
         <div class="card-visual">
           <div class="result-emoji">${top.emoji}</div>
           <div>
