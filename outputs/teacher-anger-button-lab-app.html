@@ -541,6 +541,12 @@
       color: #3e4b4d;
     }
 
+    .insight-type-title {
+      margin: 0;
+      font-size: 18px;
+      color: var(--navy);
+    }
+
     .meter-panel {
       background:
         linear-gradient(180deg, rgba(255,255,255,.9), rgba(255, 254, 250, .88)),
@@ -1761,43 +1767,48 @@
       const scores = getScores();
       const topTypes = getTopTypes();
       const top = topTypes[0];
-      const coTopNote = topTypes.length > 1
-        ? `<p class="lead" style="margin: 6px 0 0;">${topTypes.slice(1).map((type) => type.name).join(", ")}도 같은 점수의 공동 신호입니다.</p>`
+      const isTie = topTypes.length > 1;
+      const coTopNote = isTie
+        ? `<p class="lead" style="margin: 6px 0 0;">같은 점수로 나타난 공동 신호입니다. 아래에서 각 버튼의 의미를 함께 살펴보세요.</p>`
         : "";
+      const insightSections = topTypes.map((type) => `
+        ${isTie ? `<h4 class="insight-type-title">${type.emoji} ${type.name}</h4>` : ""}
+        <div class="insight-grid">
+          <div class="insight-card">
+            <div class="insight-icon">🔔</div>
+            <div>
+              <h4>이 버튼의 의미</h4>
+              <p>${type.meaning}</p>
+            </div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-icon">💛</div>
+            <div>
+              <h4>버튼 뒤 욕구</h4>
+              <p><strong>${type.need}</strong></p>
+            </div>
+          </div>
+          <div class="insight-card wide">
+            <div class="insight-icon">🧩</div>
+            <div>
+              <h4>해석</h4>
+              <p>${type.guide}</p>
+            </div>
+          </div>
+        </div>
+      `).join("");
       $("#topTypeCard").innerHTML = `
         <div class="result-summary">
           <div class="result-main">
             <div class="result-emoji">${top.emoji}</div>
             <div>
               <p class="chip">대표 마음 신호</p>
-              <h3>${top.name}</h3>
+              <h3>${topTypes.map((type) => type.name).join(" · ")}</h3>
               <span class="result-score">현재 점수 ${scores[top.id]}/20</span>
               ${coTopNote}
             </div>
           </div>
-          <div class="insight-grid">
-            <div class="insight-card">
-              <div class="insight-icon">🔔</div>
-              <div>
-                <h4>이 버튼의 의미</h4>
-                <p>${top.meaning}</p>
-              </div>
-            </div>
-            <div class="insight-card">
-              <div class="insight-icon">💛</div>
-              <div>
-                <h4>버튼 뒤 욕구</h4>
-                <p><strong>${top.need}</strong></p>
-              </div>
-            </div>
-            <div class="insight-card wide">
-              <div class="insight-icon">🧩</div>
-              <div>
-                <h4>해석</h4>
-                <p>${top.guide}</p>
-              </div>
-            </div>
-          </div>
+          ${insightSections}
         </div>
       `;
     }
@@ -1830,14 +1841,14 @@
             <div class="final-highlight-icon">🔔</div>
             <div>
               <h3>대표 분노버튼</h3>
-              <p><strong>${topNames}</strong><br>${top.meaning}</p>
+              <p>${topTypes.map((type) => `<strong>${type.name}</strong><br>${type.meaning}`).join("<br>")}</p>
             </div>
           </div>
           <div class="final-highlight">
             <div class="final-highlight-icon">💛</div>
             <div>
               <h3>버튼 뒤 욕구</h3>
-              <p><strong>${top.need}</strong></p>
+              <p><strong>${topTypes.length > 1 ? topTypes.map((type) => `${type.name.replace(" 버튼", "")}: ${type.need}`).join("<br>") : top.need}</strong></p>
             </div>
           </div>
         </div>
@@ -1971,8 +1982,14 @@
       drawText(ctx, coachLine, 340, y + 74, 34, "#243033", 700, "bold");
       y += coachBoxHeight + 60;
 
-      y = drawSection(ctx, "대표 분노버튼", `${topNames} (${scores[top.id]}/20)\n${top.meaning}`, y);
-      y = drawSection(ctx, "버튼 뒤의 핵심 욕구", top.need, y);
+      const buttonBody = topTypes.length > 1
+        ? `${topNames} (${scores[top.id]}/20)\n` + topTypes.map((type) => `${type.name}: ${type.meaning}`).join("\n")
+        : `${top.name} (${scores[top.id]}/20)\n${top.meaning}`;
+      const needBody = topTypes.length > 1
+        ? topTypes.map((type) => `${type.name.replace(" 버튼", "")}: ${type.need}`).join("\n")
+        : top.need;
+      y = drawSection(ctx, "대표 분노버튼", buttonBody, y);
+      y = drawSection(ctx, "버튼 뒤의 핵심 욕구", needBody, y);
       y = drawSection(ctx, "나의 마음 안정 버튼", getSelectedStrategies().join("\n") || "아직 선택하지 않았습니다.", y);
       y = drawSection(ctx, "다음 주 작은 회복 행동", getValue("nextAction") || "작은 회복 행동을 한 가지 정해 봅니다.", y);
 
