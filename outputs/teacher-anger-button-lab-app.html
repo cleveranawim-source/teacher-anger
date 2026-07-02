@@ -1316,9 +1316,7 @@
           <div class="toolbar actions">
             <button class="btn" type="button" data-go="character">수정</button>
             <button class="btn soft" type="button" id="copyPromptBtn">프롬프트 복사</button>
-            <button class="btn soft" type="button" id="copySummaryBtn">설명서 복사</button>
             <button class="btn warn" type="button" id="downloadCardBtn">카드 이미지 저장</button>
-            <button class="btn" type="button" id="printBtn">인쇄</button>
           </div>
         </div>
 
@@ -1551,9 +1549,7 @@
 
       $("#copyPromptBtn").addEventListener("click", () => copyText(makeKoreanPrompt()));
       $("#copyEnglishPromptBtn").addEventListener("click", () => copyText(makeEnglishPrompt()));
-      $("#copySummaryBtn").addEventListener("click", () => copyText(makeSummaryText()));
       $("#downloadCardBtn").addEventListener("click", downloadCardImage);
-      $("#printBtn").addEventListener("click", () => window.print());
       $("#restartBtn").addEventListener("click", restartAll);
 
       characterFieldIds.forEach((id) => {
@@ -1878,23 +1874,6 @@
     function getCharacterColor() {
       if (getValue("charColor") !== "custom") return getValue("charColor");
       return getValue("charColorCustom") || "내가 직접 정한 색감";
-    }
-
-    function makeSummaryText() {
-      const topTypes = getTopTypes();
-      const top = topTypes[0];
-      return [
-        "나를 지키는 교사 마음 설명서",
-        `대표 분노버튼: ${topTypes.map((type) => type.name).join(" · ")}`,
-        `버튼 뒤 욕구: ${top.need}`,
-        `마음 안정 버튼: ${getSelectedStrategies().join(" / ") || "미선택"}`,
-        `캐릭터 이름: ${getValue("charName")}`,
-        `캐릭터 한마디: ${getValue("coachLine")}`,
-        `다음 주 회복 행동: ${getValue("nextAction")}`,
-        "",
-        "AI 이미지 프롬프트:",
-        makeKoreanPrompt()
-      ].join("\n");
     }
 
     function getSelectedStrategies() {
