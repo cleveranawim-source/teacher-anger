@@ -1296,12 +1296,12 @@
               </div>
               <div class="field full">
                 <label for="coachLine">캐릭터가 나에게 해주는 한마디</label>
-                <textarea id="coachLine" placeholder="내가 듣고 싶은 말을 직접 써 주세요.">잠깐 멈춘다고 책임을 피하는 것은 아니야.</textarea>
+                <textarea id="coachLine" placeholder="예시: 잠깐 멈춘다고 책임을 피하는 것은 아니야."></textarea>
                 <p class="field-note">아래 예시를 눌러 넣어도 되고, 내 상황에 맞게 직접 고쳐 써도 됩니다.</p>
               </div>
               <div class="field full">
                 <label for="nextAction">다음 주에 해볼 작은 회복 행동</label>
-                <input id="nextAction" type="text" value="감정이 올라올 때 바로 답하지 않고 물 한 잔 마신 뒤 문장을 정리하기">
+                <input id="nextAction" type="text" placeholder="예시: 감정이 올라올 때 바로 답하지 않고 물 한 잔 마신 뒤 문장을 정리하기">
               </div>
             </div>
           </div>
@@ -1870,7 +1870,7 @@
       const type = getValue("charType");
       const color = getCharacterColor();
       const mood = getValue("charMood");
-      const line = getValue("coachLine");
+      const line = getValue("coachLine") || "잠깐 멈추고 내 마음부터 확인해도 돼.";
       return `차분하고 단단한 분위기의 마음 안정 캐릭터를 그려주세요. 캐릭터 이름은 "${charName}"입니다. 캐릭터는 ${mood} 느낌이며, 형태는 ${type}이고, 색감은 ${color}입니다. 교직 생활에서 지친 사람에게 "${line}"라는 말을 조용히 건네는 듯한 표정과 자세를 가지고 있습니다. 말풍선, 글자, 로고, 학교명, 실제 이름은 이미지 안에 넣지 마세요.`;
     }
 
@@ -1878,7 +1878,7 @@
       const type = getValue("charType");
       const color = getCharacterColor();
       const mood = getValue("charMood");
-      const line = getValue("coachLine");
+      const line = getValue("coachLine") || "잠깐 멈추고 내 마음부터 확인해도 돼.";
       return `Create a calm and grounded emotional support character for a teacher. The character should feel ${mood}, with a ${color} color palette, and should be a ${type}. It should look as if it is quietly saying this coaching line: "${line}". Express care through facial expression, posture, and mood, not through written text. Do not include speech bubbles, text, letters, logos, school names, or real names.`;
     }
 
